@@ -70,11 +70,14 @@ const Header = () => {
           &times;
         </button>
         <nav className='flex flex-col min-h-screen py-8'>
+          <Link to='/' className='text-center py-6 hover:text-red-600'>
+            Home
+          </Link>
           {user ? (
             <>
               <Link
                 to='/profile'
-                className='text-center py-6  hover:text-red-600'
+                className='text-center py-6 hover:text-red-600'
               >
                 Profile
               </Link>
@@ -87,10 +90,7 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Link
-                to='/login'
-                className='text-center py-6  hover:text-red-600'
-              >
+              <Link to='/login' className='text-center py-6 hover:text-red-600'>
                 Login
               </Link>
               <Link
