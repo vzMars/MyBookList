@@ -6,10 +6,11 @@ import RequireGuest from './components/RequireGuest';
 
 // pages
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
-import NotFound from './pages/NotFound';
+import Search from './pages/Search';
 
 // layouts
 import Layout from './layouts/Layout';
@@ -28,6 +29,7 @@ function App() {
 
           <Route element={<RequireAuth />}>
             <Route path='profile' element={<Profile />} />
+            <Route path='search' element={<Search />} />
           </Route>
 
           <Route path='*' element={<NotFound />} />
