@@ -7,10 +7,12 @@ export const authReducer = (state, action) => {
     case 'LOGIN':
       return {
         user: action.payload,
+        isLoading: false,
       };
     case 'LOGOUT':
       return {
         user: null,
+        isLoading: false,
       };
     default:
       return state;
@@ -20,6 +22,7 @@ export const authReducer = (state, action) => {
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
+    isLoading: true,
   });
 
   useEffect(() => {
@@ -38,8 +41,14 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ ...state, dispatch }}>
-      {children}
-    </AuthContext.Provider>
+    <>
+      {state.isLoading ? (
+        <span className='loader'></span>
+      ) : (
+        <AuthContext.Provider value={{ ...state, dispatch }}>
+          {children}
+        </AuthContext.Provider>
+      )}
+    </>
   );
 };
