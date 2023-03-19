@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useLogout } from '../hooks/useLogout';
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const { user } = useAuthContext();
+  const { logout } = useLogout();
 
   const toggleMobileMenu = () => {
     setMobileMenu(!mobileMenu);
   };
 
   const handleClick = () => {
-    console.log('logout btn clicked');
+    logout();
   };
 
   return (
