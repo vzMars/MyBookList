@@ -15,7 +15,7 @@ const Header = () => {
   };
 
   return (
-    <header className='bg-neutral-800 text-white sticky top-0 z-10'>
+    <header className='bg-neutral-800 text-white'>
       <section className='max-w-4xl mx-auto p-4 py-5 flex justify-between items-center'>
         <Link to='/' className='text-3xl font-bold text-red-600 sm:text-4xl'>
           MyBookList
