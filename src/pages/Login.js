@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLogin } from '../hooks/useLogin';
+import Error from '../components/Error';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -39,11 +40,7 @@ const Login = () => {
         >
           Sign Up
         </button>
-        {error && (
-          <div className='p-2 bg-rose-100 rounded border-2 text-rose-600 border-rose-600 font-medium'>
-            {error}
-          </div>
-        )}
+        {error && <Error errorMsg={error} />}
       </form>
     </main>
   );

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Books from '../components/Books';
 import Pagination from '../components/Pagination';
+import Error from '../components/Error';
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -75,11 +76,7 @@ const Search = () => {
           currentPage={currentPage}
           paginate={paginate}
         />
-        {error && (
-          <div className='p-2 bg-rose-100 rounded border-2 text-rose-600 border-rose-600 font-medium'>
-            {error}
-          </div>
-        )}
+        {error && <Error errorMsg={error} />}
       </section>
     </main>
   );
