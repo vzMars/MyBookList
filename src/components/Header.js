@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <header className='bg-neutral-800 text-white'>
-      <section className='max-w-4xl mx-auto p-4 py-5 flex justify-between items-center'>
+      <section className='max-w-6xl mx-auto p-4 py-5 flex justify-between items-center'>
         <Link to='/' className='text-3xl font-bold text-red-600 sm:text-4xl'>
           MyBookList
         </Link>
@@ -67,7 +67,7 @@ const Header = () => {
         className={
           !mobileMenu
             ? 'hidden md:hidden'
-            : 'absolute top-0 bg-black w-full text-5xl flex flex-col justify-center md:hidden'
+            : 'fixed z-10 top-0 bg-black w-full text-5xl flex flex-col justify-center md:hidden'
         }
         onClick={toggleMobileMenu}
       >

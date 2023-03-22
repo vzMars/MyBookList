@@ -48,7 +48,7 @@ const Search = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <main className='max-w-4xl mx-auto mt-10 w-full'>
+    <main className='max-w-6xl mx-auto mt-10 w-full'>
       <section className='px-3 md:px-10 flex flex-col'>
         <h1 className='text-5xl font-bold mb-5 text-red-600'>Search</h1>
         <form
