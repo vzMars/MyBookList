@@ -11,6 +11,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Search from './pages/Search';
+import BookList from './pages/BookList';
+import BookDetails from './pages/BookDetails';
 
 // layouts
 import Layout from './layouts/Layout';
@@ -30,6 +32,10 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route path='profile' element={<Profile />} />
             <Route path='search' element={<Search />} />
+            <Route path='/books'>
+              <Route index element={<BookList />} />
+              <Route path=':id' element={<BookDetails />} />
+            </Route>
           </Route>
 
           <Route path='*' element={<NotFound />} />
