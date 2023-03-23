@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // components
 import RequireAuth from './components/RequireAuth';
@@ -37,8 +37,8 @@ function App() {
               <Route path=':id' element={<BookDetails />} />
             </Route>
           </Route>
-
-          <Route path='*' element={<NotFound />} />
+          <Route path='/404' element={<NotFound />} />
+          <Route path='*' element={<Navigate to='/404' replace />} />
         </Route>
       </Routes>
     </BrowserRouter>
