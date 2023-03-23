@@ -1,19 +1,35 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const BookDetails = () => {
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   const { id } = useParams();
+  const [book, setBook] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const response = await fetch(
-  //     `http://localhost:5000/api/books/search/${query}`,
-  //     {
-  //       method: 'GET',
-  //       credentials: 'include',
-  //     }
-  //   );
-  // }, [])
+  useEffect(() => {
+    const getDetails = async () => {
+      setLoading(true);
+      const response = await fetch(`http://localhost:5000/api/books/${id}`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+
+      const json = await response.json();
+
+      if (!response.ok) {
+        setLoading(false);
+        navigate('/404');
+      }
+
+      if (response.ok) {
+        setLoading(false);
+        setBook(json);
+      }
+    };
+
+    getDetails();
+  }, [id, navigate]);
 
   return (
     <main className='max-w-6xl mx-auto mt-10 w-full'>
@@ -21,7 +37,9 @@ const BookDetails = () => {
         {loading ? (
           <span className='loader self-center mt-5'></span>
         ) : (
-          <h1>BookDetails {id}</h1>
+          <h1 className='text-white'>
+            {book.title} {id}
+          </h1>
         )}
       </section>
     </main>
