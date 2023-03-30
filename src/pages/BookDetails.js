@@ -41,7 +41,7 @@ const BookDetails = () => {
     const newBook = {
       bookId: id,
       title: book.title,
-      authors: book.authors,
+      authors: book.authors ? book.authors : ['Unknown Author'],
       status: e.target.value,
     };
 
@@ -92,7 +92,9 @@ const BookDetails = () => {
             />
             <div className='flex flex-col'>
               <h1 className='text-2xl font-bold text-red-600'>{book.title}</h1>
-              <span>By {book.authors.join(', ')}</span>
+              <span>
+                By {book.authors ? book.authors.join(', ') : 'Unknown Author'}
+              </span>
               {book.description ? (
                 <>
                   <p className='mt-5'>
