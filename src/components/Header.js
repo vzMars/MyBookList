@@ -33,7 +33,10 @@ const Header = () => {
           <nav className='hidden md:block space-x-6 text-lg font-medium'>
             {user ? (
               <>
-                <Link to='/profile' className='hover:text-red-600'>
+                <Link
+                  to={`/user/${user.userName}`}
+                  className='hover:text-red-600'
+                >
                   Profile
                 </Link>
                 <Link to='/search' className='hover:text-red-600'>
