@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useBookContext } from '../hooks/useBookContext';
 import cover from '../images/cover.png';
 
 const BookDetails = () => {
+  const { dispatch } = useBookContext();
   const navigate = useNavigate();
   const { id } = useParams();
   const [book, setBook] = useState(null);
+  const [status, setStatus] = useState(null);
   const [readMore, setReadMore] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -26,12 +29,46 @@ const BookDetails = () => {
 
       if (response.ok) {
         setLoading(false);
-        setBook(json);
+        setBook(json.details);
+        setStatus(json.status);
       }
     };
 
     getDetails();
   }, [id, navigate]);
+
+  const addBook = async (e) => {
+    const newBook = {
+      bookId: id,
+      title: book.title,
+      authors: book.authors,
+      status: e.target.value,
+    };
+
+    const response = await fetch('http://localhost:5000/api/books', {
+      method: 'POST',
+      body: JSON.stringify(newBook),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+
+    const json = await response.json();
+
+    if (response.ok) {
+      setStatus(e.target.value);
+      dispatch({ type: 'ADD_BOOK', payload: json });
+    }
+  };
+
+  const updateStatus = (e) => {
+    console.log('update status method');
+    // const value = e.target.value;
+    // if (value !== status) {
+    //   setStatus(value);
+    // }
+  };
 
   const regex = /(<([^>]+)>)/gi;
 
@@ -76,14 +113,35 @@ const BookDetails = () => {
                 <p className='mt-5'>Description Unavailable</p>
               )}
               <div className='flex space-x-2 text-black font-bold'>
-                <button className='p-2 bg-green-500 rounded-md hover:opacity-90'>
-                  Want to Read
+                <button
+                  className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
+                    status === 'reading' ? 'bg-green-600' : 'bg-red-600'
+                  }`}
+                  value='reading'
+                  disabled={status === 'reading'}
+                  onClick={status ? updateStatus : addBook}
+                >
+                  Reading
                 </button>
-                <button className='p-2 bg-green-500 rounded-md hover:opacity-90'>
-                  Currently Reading
+                <button
+                  className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
+                    status === 'completed' ? 'bg-green-600' : 'bg-red-600'
+                  }`}
+                  value='completed'
+                  disabled={status === 'completed'}
+                  onClick={status ? updateStatus : addBook}
+                >
+                  Completed
                 </button>
-                <button className='p-2 bg-green-500 rounded-md hover:opacity-90'>
-                  Read
+                <button
+                  className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
+                    status === 'planning' ? 'bg-green-600' : 'bg-red-600'
+                  }`}
+                  value='planning'
+                  disabled={status === 'planning'}
+                  onClick={status ? updateStatus : addBook}
+                >
+                  Planning
                 </button>
               </div>
             </div>
