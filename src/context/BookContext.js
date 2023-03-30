@@ -10,7 +10,13 @@ export const bookReducer = (state, action) => {
       };
     case 'ADD_BOOK':
       return {
-        books: [action.payload, ...state.books],
+        books: [...state.books, action.payload],
+      };
+    case 'UPDATE_BOOK':
+      return {
+        books: state.books.map((book) =>
+          book._id === action.payload._id ? action.payload : book
+        ),
       };
     default:
       return state;

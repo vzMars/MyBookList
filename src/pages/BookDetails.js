@@ -62,12 +62,26 @@ const BookDetails = () => {
     }
   };
 
-  const updateStatus = (e) => {
-    console.log('update status method');
-    // const value = e.target.value;
-    // if (value !== status) {
-    //   setStatus(value);
-    // }
+  const updateStatus = async (e) => {
+    const updatedStatus = {
+      status: e.target.value,
+    };
+
+    const response = await fetch(`http://localhost:5000/api/books/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedStatus),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+
+    const json = await response.json();
+
+    if (response.ok) {
+      setStatus(e.target.value);
+      dispatch({ type: 'UPDATE_BOOK', payload: json });
+    }
   };
 
   const regex = /(<([^>]+)>)/gi;
