@@ -84,7 +84,7 @@ const Header = () => {
           {user ? (
             <>
               <Link
-                to='/profile'
+                to={`/user/${user.userName}`}
                 className='text-center py-6 hover:text-red-600'
               >
                 Profile
