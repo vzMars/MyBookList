@@ -42,6 +42,7 @@ const BookDetails = () => {
       bookId: id,
       title: book.title,
       authors: book.authors ? book.authors : ['Unknown Author'],
+      cover: !book.imageLinks ? '' : book.imageLinks.thumbnail,
       status: e.target.value,
     };
 
@@ -126,7 +127,7 @@ const BookDetails = () => {
                   </button>
                 </>
               ) : (
-                <p className='mt-5'>Description Unavailable</p>
+                <p className='mt-5 mb-5'>Description Unavailable</p>
               )}
               <div className='flex space-x-2 text-black font-bold'>
                 <button
