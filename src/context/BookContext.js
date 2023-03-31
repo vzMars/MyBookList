@@ -7,6 +7,7 @@ export const bookReducer = (state, action) => {
     case 'SET_BOOKS':
       return {
         books: action.payload,
+        isLoading: false,
       };
     case 'ADD_BOOK':
       return {
@@ -26,6 +27,7 @@ export const bookReducer = (state, action) => {
 export const BookProvider = ({ children }) => {
   const [state, dispatch] = useReducer(bookReducer, {
     books: null,
+    isLoading: true,
   });
 
   useEffect(() => {
@@ -44,8 +46,14 @@ export const BookProvider = ({ children }) => {
   }, []);
 
   return (
-    <BookContext.Provider value={{ ...state, dispatch }}>
-      {children}
-    </BookContext.Provider>
+    <>
+      {state.isLoading ? (
+        <span className='loader'></span>
+      ) : (
+        <BookContext.Provider value={{ ...state, dispatch }}>
+          {children}
+        </BookContext.Provider>
+      )}
+    </>
   );
 };
