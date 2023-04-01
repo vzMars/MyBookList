@@ -42,6 +42,9 @@ const Header = () => {
                 <Link to='/search' className='hover:text-red-600'>
                   Search
                 </Link>
+                <Link to='/users' className='hover:text-red-600'>
+                  Users
+                </Link>
                 <button
                   onClick={handleClick}
                   className='text-black bg-red-600 py-1.5 px-3 rounded-md hover:opacity-90'
@@ -94,6 +97,9 @@ const Header = () => {
                 className='text-center py-6 hover:text-red-600'
               >
                 Search
+              </Link>
+              <Link to='/users' className='text-center py-6 hover:text-red-600'>
+                Users
               </Link>
               <button
                 onClick={handleClick}
