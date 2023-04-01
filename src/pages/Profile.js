@@ -15,7 +15,7 @@ const Profile = () => {
   const { user } = useAuthContext();
 
   useEffect(() => {
-    const getDetails = async () => {
+    const getProfile = async () => {
       setLoading(true);
       const response = await fetch(
         `http://localhost:5000/api/books/user/${userName}`,
@@ -33,16 +33,14 @@ const Profile = () => {
       }
 
       if (response.ok) {
-        setProfileName(json);
-        setProfileBooks(
-          books.filter((book) => book.user.userName === profileName)
-        );
+        setProfileName(json.userName);
+        setProfileBooks(json.books);
         setLoading(false);
       }
     };
 
-    getDetails();
-  }, [books, userName, profileName, navigate]);
+    getProfile();
+  }, [userName, navigate]);
 
   const switchTabs = (e) => {
     if (activeTab === e.target.value) return;
@@ -66,8 +64,34 @@ const Profile = () => {
     console.log('delete btn clicked', id);
   };
 
-  const updateStatus = async (e) => {
-    console.log('update btn clicked', e.target.value);
+  const updateStatus = async (e, id) => {
+    const updatedStatus = {
+      status: e.target.value,
+    };
+
+    const response = await fetch(`http://localhost:5000/api/books/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedStatus),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+
+    const json = await response.json();
+
+    if (response.ok) {
+      dispatch({ type: 'UPDATE_BOOK', payload: json });
+      if (activeTab === 'all') {
+        setProfileBooks(
+          profileBooks.map((book) =>
+            book.bookId === id ? { ...book, status: e.target.value } : book
+          )
+        );
+      } else {
+        setProfileBooks(profileBooks.filter((book) => book.bookId !== id));
+      }
+    }
   };
 
   return (
@@ -160,7 +184,7 @@ const Profile = () => {
                       disabled={
                         book.status === 'reading' || book.user._id !== user.id
                       }
-                      onClick={updateStatus}
+                      onClick={(e) => updateStatus(e, book.bookId)}
                     >
                       Reading
                     </button>
@@ -174,7 +198,7 @@ const Profile = () => {
                       disabled={
                         book.status === 'completed' || book.user._id !== user.id
                       }
-                      onClick={updateStatus}
+                      onClick={(e) => updateStatus(e, book.bookId)}
                     >
                       Completed
                     </button>
@@ -188,7 +212,7 @@ const Profile = () => {
                       disabled={
                         book.status === 'planning' || book.user._id !== user.id
                       }
-                      onClick={updateStatus}
+                      onClick={(e) => updateStatus(e, book.bookId)}
                     >
                       Planning
                     </button>
