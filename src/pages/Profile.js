@@ -60,8 +60,21 @@ const Profile = () => {
     setActiveTab(e.target.value);
   };
 
-  const deleteBook = (id) => {
-    console.log('delete btn clicked', id);
+  const deleteBook = async (id) => {
+    const response = await fetch(`http://localhost:5000/api/books/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+
+    const json = await response.json();
+
+    if (response.ok) {
+      dispatch({ type: 'DELETE_BOOK', payload: json });
+      setProfileBooks(profileBooks.filter((book) => book.bookId !== id));
+    }
   };
 
   const updateStatus = async (e, id) => {

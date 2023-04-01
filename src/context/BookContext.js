@@ -12,12 +12,19 @@ export const bookReducer = (state, action) => {
     case 'ADD_BOOK':
       return {
         books: [...state.books, action.payload],
+        isLoading: false,
       };
     case 'UPDATE_BOOK':
       return {
         books: state.books.map((book) =>
           book._id === action.payload._id ? action.payload : book
         ),
+        isLoading: false,
+      };
+    case 'DELETE_BOOK':
+      return {
+        books: state.books.filter((book) => book._id !== action.payload._id),
+        isLoading: false,
       };
     default:
       return state;
