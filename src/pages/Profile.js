@@ -157,82 +157,86 @@ const Profile = () => {
                 Planning
               </button>
             </nav>
-            <ul className='flex flex-col my-5 bg-neutral-800 p-2 rounded-md'>
-              {profileBooks.map((book) => (
-                <li
-                  key={book._id}
-                  className='flex flex-col p-3 border-b-2 border-neutral-700 last:border-b-0'
-                >
-                  <div className='flex space-x-2'>
-                    <img
-                      src={book.cover ? book.cover : cover}
-                      alt={book.title}
-                      className='h-48 object-cover object-center border border-neutral-500 md:h-60'
-                    />
-                    <div className='flex-1'>
-                      <a href={`/books/${book.bookId}`}>
-                        <h2 className='text-red-600 md:text-2xl'>
-                          {book.title}
-                        </h2>
-                      </a>
-                      <span>By {book.authors.join(', ')}</span>
+            {profileBooks.length > 0 && (
+              <ul className='flex flex-col my-5 bg-neutral-800 p-2 rounded-md'>
+                {profileBooks.map((book) => (
+                  <li
+                    key={book._id}
+                    className='flex flex-col p-3 border-b-2 border-neutral-700 last:border-b-0'
+                  >
+                    <div className='flex space-x-2'>
+                      <img
+                        src={book.cover ? book.cover : cover}
+                        alt={book.title}
+                        className='h-48 object-cover object-center border border-neutral-500 md:h-60'
+                      />
+                      <div className='flex-1'>
+                        <a href={`/books/${book.bookId}`}>
+                          <h2 className='text-red-600 md:text-2xl'>
+                            {book.title}
+                          </h2>
+                        </a>
+                        <span>By {book.authors.join(', ')}</span>
+                      </div>
+                      {user.id === book.user._id && (
+                        <span
+                          className='material-symbols-outlined text-red-600 cursor-pointer md:text-3xl self-start'
+                          onClick={() => deleteBook(book.bookId)}
+                        >
+                          delete
+                        </span>
+                      )}
                     </div>
-                    {user.id === book.user._id && (
-                      <span
-                        className='material-symbols-outlined text-red-600 cursor-pointer md:text-3xl self-start'
-                        onClick={() => deleteBook(book.bookId)}
+                    <div className='flex space-x-2 text-sm text-black font-bold self-start items-start md:flex-row md:space-y-0 md:space-x-2 md:text-base mt-5'>
+                      <button
+                        className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
+                          book.status === 'reading'
+                            ? 'bg-green-600'
+                            : 'bg-red-600'
+                        }`}
+                        value='reading'
+                        disabled={
+                          book.status === 'reading' || book.user._id !== user.id
+                        }
+                        onClick={(e) => updateStatus(e, book.bookId)}
                       >
-                        delete
-                      </span>
-                    )}
-                  </div>
-                  <div className='flex space-x-2 text-sm text-black font-bold self-start items-start md:flex-row md:space-y-0 md:space-x-2 md:text-base mt-5'>
-                    <button
-                      className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
-                        book.status === 'reading'
-                          ? 'bg-green-600'
-                          : 'bg-red-600'
-                      }`}
-                      value='reading'
-                      disabled={
-                        book.status === 'reading' || book.user._id !== user.id
-                      }
-                      onClick={(e) => updateStatus(e, book.bookId)}
-                    >
-                      Reading
-                    </button>
-                    <button
-                      className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
-                        book.status === 'completed'
-                          ? 'bg-green-600'
-                          : 'bg-red-600'
-                      }`}
-                      value='completed'
-                      disabled={
-                        book.status === 'completed' || book.user._id !== user.id
-                      }
-                      onClick={(e) => updateStatus(e, book.bookId)}
-                    >
-                      Completed
-                    </button>
-                    <button
-                      className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
-                        book.status === 'planning'
-                          ? 'bg-green-600'
-                          : 'bg-red-600'
-                      }`}
-                      value='planning'
-                      disabled={
-                        book.status === 'planning' || book.user._id !== user.id
-                      }
-                      onClick={(e) => updateStatus(e, book.bookId)}
-                    >
-                      Planning
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                        Reading
+                      </button>
+                      <button
+                        className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
+                          book.status === 'completed'
+                            ? 'bg-green-600'
+                            : 'bg-red-600'
+                        }`}
+                        value='completed'
+                        disabled={
+                          book.status === 'completed' ||
+                          book.user._id !== user.id
+                        }
+                        onClick={(e) => updateStatus(e, book.bookId)}
+                      >
+                        Completed
+                      </button>
+                      <button
+                        className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
+                          book.status === 'planning'
+                            ? 'bg-green-600'
+                            : 'bg-red-600'
+                        }`}
+                        value='planning'
+                        disabled={
+                          book.status === 'planning' ||
+                          book.user._id !== user.id
+                        }
+                        onClick={(e) => updateStatus(e, book.bookId)}
+                      >
+                        Planning
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
       </section>
