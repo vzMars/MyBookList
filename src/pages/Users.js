@@ -39,13 +39,14 @@ const Users = () => {
           <div>
             <h1 className='text-5xl font-bold mb-5 text-red-600'>Users</h1>
             <ul className='grid grid-cols-1 my-5 gap-5 md:grid-cols-3 md:space-y-0 '>
-              {users.map((user) => (
-                <UserCard
-                  key={user._id}
-                  user={user}
-                  books={books.filter((book) => book.user._id === user._id)}
-                />
-              ))}
+              {books &&
+                users.map((user) => (
+                  <UserCard
+                    key={user._id}
+                    user={user}
+                    books={books.filter((book) => book.user._id === user._id)}
+                  />
+                ))}
             </ul>
           </div>
         )}
