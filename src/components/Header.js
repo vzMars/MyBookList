@@ -73,32 +73,32 @@ const Header = () => {
         className={
           !mobileMenu
             ? 'hidden md:hidden'
-            : 'fixed z-10 top-0 bg-black w-full text-5xl flex flex-col justify-center md:hidden'
+            : 'fixed z-10 top-0 bg-black w-full text-2xl flex flex-col justify-center md:hidden'
         }
         onClick={toggleMobileMenu}
       >
-        <button className='text-8xl self-end px-6 hover:text-red-600'>
+        <button className='text-7xl self-end px-6 hover:text-red-600'>
           &times;
         </button>
-        <nav className='flex flex-col min-h-screen py-8'>
-          <Link to='/' className='text-center py-6 hover:text-red-600'>
+        <nav className='flex flex-col min-h-screen py-4'>
+          <Link to='/' className='text-center py-4 hover:text-red-600'>
             Home
           </Link>
           {user ? (
             <>
               <Link
                 to={`/user/${user.userName}`}
-                className='text-center py-6 hover:text-red-600'
+                className='text-center py-4 hover:text-red-600'
               >
                 Profile
               </Link>
               <Link
                 to='/search'
-                className='text-center py-6 hover:text-red-600'
+                className='text-center py-4 hover:text-red-600'
               >
                 Search
               </Link>
-              <Link to='/users' className='text-center py-6 hover:text-red-600'>
+              <Link to='/users' className='text-center py-4 hover:text-red-600'>
                 Users
               </Link>
               <button
@@ -110,7 +110,7 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Link to='/login' className='text-center py-6 hover:text-red-600'>
+              <Link to='/login' className='text-center py-4 hover:text-red-600'>
                 Login
               </Link>
               <Link
