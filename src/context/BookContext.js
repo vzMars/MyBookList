@@ -1,4 +1,5 @@
 import { createContext, useReducer, useEffect } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 export const BookContext = createContext();
 
@@ -7,24 +8,20 @@ export const bookReducer = (state, action) => {
     case 'SET_BOOKS':
       return {
         books: action.payload,
-        isLoading: false,
       };
     case 'ADD_BOOK':
       return {
         books: [...state.books, action.payload],
-        isLoading: false,
       };
     case 'UPDATE_BOOK':
       return {
         books: state.books.map((book) =>
           book._id === action.payload._id ? action.payload : book
         ),
-        isLoading: false,
       };
     case 'DELETE_BOOK':
       return {
         books: state.books.filter((book) => book._id !== action.payload._id),
-        isLoading: false,
       };
     default:
       return state;
@@ -32,9 +29,9 @@ export const bookReducer = (state, action) => {
 };
 
 export const BookProvider = ({ children }) => {
+  const { user } = useAuthContext();
   const [state, dispatch] = useReducer(bookReducer, {
     books: null,
-    isLoading: true,
   });
 
   useEffect(() => {
@@ -46,21 +43,19 @@ export const BookProvider = ({ children }) => {
 
       const json = await response.json();
 
-      dispatch({ type: 'SET_BOOKS', payload: json });
+      if (response.ok) {
+        dispatch({ type: 'SET_BOOKS', payload: json });
+      }
     };
 
-    getBooks();
-  }, []);
+    if (user) {
+      getBooks();
+    }
+  }, [user]);
 
   return (
-    <>
-      {state.isLoading ? (
-        <span className='loader'></span>
-      ) : (
-        <BookContext.Provider value={{ ...state, dispatch }}>
-          {children}
-        </BookContext.Provider>
-      )}
-    </>
+    <BookContext.Provider value={{ ...state, dispatch }}>
+      {children}
+    </BookContext.Provider>
   );
 };
