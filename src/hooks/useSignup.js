@@ -13,14 +13,17 @@ export const useSignup = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch('http://localhost:5000/api/auth/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-      body: JSON.stringify({ email, userName, password }),
-    });
+    const response = await fetch(
+      'https://mybooklist-api.fly.dev/api/auth/signup',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ email, userName, password }),
+      }
+    );
 
     const json = await response.json();
 

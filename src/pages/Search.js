@@ -19,7 +19,7 @@ const Search = () => {
     setError(null);
 
     const response = await fetch(
-      `http://localhost:5000/api/books/search/${query}`,
+      `https://mybooklist-api.fly.dev/api/books/search/${query}`,
       {
         method: 'GET',
         credentials: 'include',

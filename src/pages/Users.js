@@ -10,10 +10,13 @@ const Users = () => {
   useEffect(() => {
     const getUsers = async () => {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/auth/users', {
-        method: 'GET',
-        credentials: 'include',
-      });
+      const response = await fetch(
+        'https://mybooklist-api.fly.dev/api/auth/users',
+        {
+          method: 'GET',
+          credentials: 'include',
+        }
+      );
 
       const json = await response.json();
 
