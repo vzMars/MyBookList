@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
+import { useBookContext } from './useBookContext';
+import { getBooks } from '../services/getBooks';
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
+  const { dispatch: bookDispatch } = useBookContext();
 
   const login = async (email, password) => {
     setIsLoading(true);
@@ -28,6 +31,7 @@ export const useLogin = () => {
 
     if (response.ok) {
       dispatch({ type: 'LOGIN', payload: json.user });
+      getBooks(bookDispatch);
       setIsLoading(false);
     }
   };

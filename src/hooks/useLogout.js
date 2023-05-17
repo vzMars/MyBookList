@@ -13,7 +13,7 @@ export const useLogout = () => {
 
     if (response.ok) {
       dispatch({ type: 'LOGOUT' });
-      bookDispatch({ type: 'SET_BOOKS', payload: null });
+      bookDispatch({ type: 'SET_BOOKS', payload: [] });
     }
   };
 
