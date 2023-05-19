@@ -11,7 +11,7 @@ const Users = () => {
     const getUsers = async () => {
       setLoading(true);
       const response = await fetch(
-        'https://mybooklist-api.fly.dev/api/auth/users',
+        'https://api.mybooklist.vzmars.com/api/auth/users',
         {
           method: 'GET',
           credentials: 'include',

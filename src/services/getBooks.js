@@ -1,5 +1,5 @@
 export const getBooks = async (dispatch) => {
-  const response = await fetch('https://mybooklist-api.fly.dev/api/books', {
+  const response = await fetch('https://api.mybooklist.vzmars.com/api/books', {
     method: 'GET',
     credentials: 'include',
   });

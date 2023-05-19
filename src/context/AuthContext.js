@@ -27,10 +27,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const getAuthStatus = async () => {
-      const response = await fetch('https://mybooklist-api.fly.dev/api/auth', {
-        method: 'GET',
-        credentials: 'include',
-      });
+      const response = await fetch(
+        'https://api.mybooklist.vzmars.com/api/auth',
+        {
+          method: 'GET',
+          credentials: 'include',
+        }
+      );
 
       const json = await response.json();
 

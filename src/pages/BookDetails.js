@@ -16,7 +16,7 @@ const BookDetails = () => {
     const getDetails = async () => {
       setLoading(true);
       const response = await fetch(
-        `https://mybooklist-api.fly.dev/api/books/${id}`,
+        `https://api.mybooklist.vzmars.com/api/books/${id}`,
         {
           method: 'GET',
           credentials: 'include',
@@ -49,14 +49,17 @@ const BookDetails = () => {
       status: e.target.value,
     };
 
-    const response = await fetch('https://mybooklist-api.fly.dev/api/books', {
-      method: 'POST',
-      body: JSON.stringify(newBook),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    });
+    const response = await fetch(
+      'https://api.mybooklist.vzmars.com/api/books',
+      {
+        method: 'POST',
+        body: JSON.stringify(newBook),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      }
+    );
 
     const json = await response.json();
 
@@ -72,7 +75,7 @@ const BookDetails = () => {
     };
 
     const response = await fetch(
-      `https://mybooklist-api.fly.dev/api/books/${id}`,
+      `https://api.mybooklist.vzmars.com/api/books/${id}`,
       {
         method: 'PUT',
         body: JSON.stringify(updatedStatus),
