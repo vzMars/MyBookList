@@ -38,7 +38,7 @@ const Login = () => {
           disabled={isLoading}
           className='w-full bg-red-600 hover:bg-red-700 rounded-md p-2 text-black font-bold mb-6'
         >
-          Sign Up
+          Login
         </button>
         {error && <Error errorMsg={error} />}
       </form>
