@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const getAuthStatus = async () => {
-      const response = await fetch('mybooklist-api.fly.dev/api/auth', {
+      const response = await fetch('https://mybooklist-api.fly.dev/api/auth', {
         method: 'GET',
         credentials: 'include',
       });

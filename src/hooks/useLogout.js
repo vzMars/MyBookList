@@ -6,10 +6,13 @@ export const useLogout = () => {
   const { dispatch: bookDispatch } = useBookContext();
 
   const logout = async () => {
-    const response = await fetch('mybooklist-api.fly.dev/api/auth/logout', {
-      method: 'GET',
-      credentials: 'include',
-    });
+    const response = await fetch(
+      'https://mybooklist-api.fly.dev/api/auth/logout',
+      {
+        method: 'GET',
+        credentials: 'include',
+      }
+    );
 
     if (response.ok) {
       dispatch({ type: 'LOGOUT' });

@@ -18,7 +18,7 @@ const Profile = () => {
     const getProfile = async () => {
       setLoading(true);
       const response = await fetch(
-        `mybooklist-api.fly.dev/api/books/user/${userName}`,
+        `https://mybooklist-api.fly.dev/books/user/${userName}`,
         {
           method: 'GET',
           credentials: 'include',
@@ -61,13 +61,16 @@ const Profile = () => {
   };
 
   const deleteBook = async (id) => {
-    const response = await fetch(`mybooklist-api.fly.dev/api/books/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    });
+    const response = await fetch(
+      `https://mybooklist-api.fly.dev/api/books/${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      }
+    );
 
     const json = await response.json();
 
@@ -82,14 +85,17 @@ const Profile = () => {
       status: e.target.value,
     };
 
-    const response = await fetch(`mybooklist-api.fly.dev/api/books/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(updatedStatus),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    });
+    const response = await fetch(
+      `https://mybooklist-api.fly.dev/api/books/${id}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(updatedStatus),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      }
+    );
 
     const json = await response.json();
 
