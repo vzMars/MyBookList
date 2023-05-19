@@ -18,7 +18,7 @@ const Profile = () => {
     const getProfile = async () => {
       setLoading(true);
       const response = await fetch(
-        `https://mybooklist-api.fly.dev/books/user/${userName}`,
+        `https://mybooklist-api.fly.dev/api/books/user/${userName}`,
         {
           method: 'GET',
           credentials: 'include',
