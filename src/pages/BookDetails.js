@@ -15,13 +15,10 @@ const BookDetails = () => {
   useEffect(() => {
     const getDetails = async () => {
       setLoading(true);
-      const response = await fetch(
-        `https://mybooklist-api.onrender.com/api/books/${id}`,
-        {
-          method: 'GET',
-          credentials: 'include',
-        }
-      );
+      const response = await fetch(`mybooklist-api.fly.dev/api/books/${id}`, {
+        method: 'GET',
+        credentials: 'include',
+      });
 
       const json = await response.json();
 
@@ -49,17 +46,14 @@ const BookDetails = () => {
       status: e.target.value,
     };
 
-    const response = await fetch(
-      'https://mybooklist-api.onrender.com/api/books',
-      {
-        method: 'POST',
-        body: JSON.stringify(newBook),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      }
-    );
+    const response = await fetch('mybooklist-api.fly.dev/api/books', {
+      method: 'POST',
+      body: JSON.stringify(newBook),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
 
     const json = await response.json();
 
@@ -74,17 +68,14 @@ const BookDetails = () => {
       status: e.target.value,
     };
 
-    const response = await fetch(
-      `https://mybooklist-api.onrender.com/api/books/${id}`,
-      {
-        method: 'PUT',
-        body: JSON.stringify(updatedStatus),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      }
-    );
+    const response = await fetch(`mybooklist-api.fly.dev/api/books/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedStatus),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
 
     const json = await response.json();
 

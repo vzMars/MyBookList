@@ -1,11 +1,8 @@
 export const getBooks = async (dispatch) => {
-  const response = await fetch(
-    'https://mybooklist-api.onrender.com/api/books',
-    {
-      method: 'GET',
-      credentials: 'include',
-    }
-  );
+  const response = await fetch('mybooklist-api.fly.dev/api/books', {
+    method: 'GET',
+    credentials: 'include',
+  });
 
   if (!response.ok) {
     dispatch({ type: 'SET_BOOKS', payload: [] });

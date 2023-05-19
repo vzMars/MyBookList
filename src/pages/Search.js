@@ -19,7 +19,7 @@ const Search = () => {
     setError(null);
 
     const response = await fetch(
-      `https://mybooklist-api.onrender.com/api/books/search/${query}`,
+      `mybooklist-api.fly.dev/api/books/search/${query}`,
       {
         method: 'GET',
         credentials: 'include',
