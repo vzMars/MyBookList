@@ -18,7 +18,7 @@ const Profile = () => {
     const getProfile = async () => {
       setLoading(true);
       const response = await fetch(
-        `https://mybooklist-api.fly.dev/api/books/user/${userName}`,
+        `https://mybooklist-api.onrender.com/api/books/user/${userName}`,
         {
           method: 'GET',
           credentials: 'include',
@@ -62,7 +62,7 @@ const Profile = () => {
 
   const deleteBook = async (id) => {
     const response = await fetch(
-      `https://mybooklist-api.fly.dev/api/books/${id}`,
+      `https://mybooklist-api.onrender.com/api/books/${id}`,
       {
         method: 'DELETE',
         headers: {
@@ -86,7 +86,7 @@ const Profile = () => {
     };
 
     const response = await fetch(
-      `https://mybooklist-api.fly.dev/api/books/${id}`,
+      `https://mybooklist-api.onrender.com/api/books/${id}`,
       {
         method: 'PUT',
         body: JSON.stringify(updatedStatus),

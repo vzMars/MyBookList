@@ -7,7 +7,7 @@ export const useLogout = () => {
 
   const logout = async () => {
     const response = await fetch(
-      'https://mybooklist-api.fly.dev/api/auth/logout',
+      'https://mybooklist-api.onrender.com/api/auth/logout',
       {
         method: 'GET',
         credentials: 'include',
