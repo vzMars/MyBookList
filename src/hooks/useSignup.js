@@ -14,7 +14,7 @@ export const useSignup = () => {
     setError(null);
 
     const response = await fetch(
-      'https://mybooklist-api.fly.dev/api/auth/signup',
+      'https://api.mybooklist.vzmars.com/api/auth/signup',
       {
         method: 'POST',
         headers: {
