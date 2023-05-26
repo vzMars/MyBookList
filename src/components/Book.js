@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Book = ({ book }) => {
   return (
-    <li className='w-full overflow-hidden rounded-md bg-neutral-800 lg:h-80 border border-neutral-500 hover:border-neutral-200 hover:border-2'>
+    <li className='w-full overflow-hidden rounded-md bg-blue-900 lg:h-80 border border-blue-900 hover:border-blue-800 hover:border-2'>
       <Link to={`/books/${book.id}`}>
         <img
           className='h-full w-full object-cover object-center'

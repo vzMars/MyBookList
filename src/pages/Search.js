@@ -51,7 +51,7 @@ const Search = () => {
   return (
     <main className='max-w-6xl mx-auto mt-10 w-full'>
       <section className='px-3 md:px-10 flex flex-col'>
-        <h1 className='text-5xl font-bold mb-5 text-red-600'>Search</h1>
+        <h1 className='text-5xl font-bold mb-5 text-blue-900'>Search</h1>
         <form
           className='flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-2 mb-5'
           onSubmit={handleSubmit}
@@ -60,11 +60,11 @@ const Search = () => {
             type='text'
             onChange={(e) => setQuery(e.target.value)}
             value={query}
-            className='p-3 rounded-lg md:flex-1'
+            className='p-3 rounded-lg md:flex-1 border border-blue-950'
           />
           <button
             disabled={!query.length}
-            className='bg-red-600 hover:bg-red-700 rounded-md p-3 px-10 text-black font-bold'
+            className='bg-blue-900 hover:bg-blue-800 rounded-md p-3 px-10 text-white font-bold'
           >
             Search
           </button>

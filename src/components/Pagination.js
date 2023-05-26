@@ -28,10 +28,10 @@ const Pagination = ({
           <li key={num}>
             <button
               onClick={() => paginate(num)}
-              className={`px-3 py-2 leading-tight text-white border ${
+              className={`px-3 py-2 leading-tight border ${
                 num === currentPage
-                  ? ' bg-red-600 border-red-700 hover:bg-red-700'
-                  : 'bg-neutral-800 border-neutral-700 hover:bg-neutral-700'
+                  ? ' bg-blue-100 border-blue-800 hover:bg-blue-50 text-black'
+                  : 'bg-blue-900 hover:bg-blue-800 border-blue-800 text-white'
               }`}
             >
               {num}

@@ -102,7 +102,7 @@ const BookDetails = () => {
         {loading ? (
           <span className='loader self-center mt-5'></span>
         ) : (
-          <div className='text-white bg-neutral-800 p-5 rounded-md flex flex-col gap-3 md:gap-5 md:flex-row'>
+          <div className='text-black bg-blue-100 p-5 rounded-md flex flex-col gap-3 md:gap-5 md:flex-row border border-blue-900'>
             <img
               src={
                 !book.imageLinks
@@ -111,11 +111,11 @@ const BookDetails = () => {
                   ? book.imageLinks.small
                   : book.imageLinks.thumbnail
               }
-              className='border border-neutral-500 h-full'
+              className='border border-blue-900 h-full'
               alt={book.title}
             />
             <div className='flex flex-col'>
-              <h1 className='text-2xl font-bold text-red-600'>{book.title}</h1>
+              <h1 className='text-2xl font-bold text-blue-900'>{book.title}</h1>
               <span>
                 By {book.authors ? book.authors.join(', ') : 'Unknown Author'}
               </span>
@@ -129,7 +129,7 @@ const BookDetails = () => {
                           .slice(0, 500)}...`}
                   </p>
                   <button
-                    className='font-bold self-end m-5 text-black bg-red-600 p-2 rounded-md hover:opacity-90'
+                    className='font-bold self-end m-5 text-white bg-blue-900 p-2 rounded-md hover:opacity-90'
                     onClick={() => setReadMore(!readMore)}
                   >
                     {readMore ? 'Read Less' : 'Read More'}
@@ -138,10 +138,10 @@ const BookDetails = () => {
               ) : (
                 <p className='mt-5 mb-5'>Description Unavailable</p>
               )}
-              <div className='flex space-x-2 text-black font-bold'>
+              <div className='flex space-x-2 text-white font-bold'>
                 <button
                   className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
-                    status === 'reading' ? 'bg-green-600' : 'bg-red-600'
+                    status === 'reading' ? 'bg-green-600' : 'bg-blue-900'
                   }`}
                   value='reading'
                   disabled={status === 'reading'}
@@ -151,7 +151,7 @@ const BookDetails = () => {
                 </button>
                 <button
                   className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
-                    status === 'completed' ? 'bg-green-600' : 'bg-red-600'
+                    status === 'completed' ? 'bg-green-600' : 'bg-blue-900'
                   }`}
                   value='completed'
                   disabled={status === 'completed'}
@@ -161,7 +161,7 @@ const BookDetails = () => {
                 </button>
                 <button
                   className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
-                    status === 'planning' ? 'bg-green-600' : 'bg-red-600'
+                    status === 'planning' ? 'bg-green-600' : 'bg-blue-900'
                   }`}
                   value='planning'
                   disabled={status === 'planning'}
