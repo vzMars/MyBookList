@@ -119,15 +119,15 @@ const Profile = () => {
         {loading ? (
           <span className='loader self-center mt-5'></span>
         ) : (
-          <div className='text-white'>
-            <h1 className='text-red-600 text-5xl font-bold mb-5 text-center'>
+          <div className='text-black'>
+            <h1 className='text-blue-900 text-5xl font-bold mb-5 text-center'>
               {`Viewing ${
                 profileName === user.userName ? 'Your' : `${profileName}'s`
               } Book List`}
             </h1>
             <nav className='flex justify-between md:justify-evenly'>
               <button
-                className={`text-red-600 text-lg font-bold mb-2 md:text-2xl ${
+                className={`text-blue-900 text-lg font-bold mb-2 md:text-2xl ${
                   activeTab === 'all' ? 'underline' : ''
                 }`}
                 onClick={switchTabs}
@@ -136,7 +136,7 @@ const Profile = () => {
                 All
               </button>
               <button
-                className={`text-red-600 text-lg font-bold mb-2 md:text-2xl ${
+                className={`text-blue-900 text-lg font-bold mb-2 md:text-2xl ${
                   activeTab === 'reading' ? 'underline' : ''
                 }`}
                 onClick={switchTabs}
@@ -145,7 +145,7 @@ const Profile = () => {
                 Reading
               </button>
               <button
-                className={`text-red-600 text-lg font-bold mb-2 md:text-2xl ${
+                className={`text-blue-900 text-lg font-bold mb-2 md:text-2xl ${
                   activeTab === 'completed' ? 'underline' : ''
                 }`}
                 onClick={switchTabs}
@@ -154,7 +154,7 @@ const Profile = () => {
                 Completed
               </button>
               <button
-                className={`text-red-600 text-lg font-bold mb-2 md:text-2xl ${
+                className={`text-blue-900 text-lg font-bold mb-2 md:text-2xl ${
                   activeTab === 'planning' ? 'underline' : ''
                 }`}
                 onClick={switchTabs}
@@ -164,21 +164,21 @@ const Profile = () => {
               </button>
             </nav>
             {profileBooks.length > 0 && (
-              <ul className='flex flex-col my-5 bg-neutral-800 p-2 rounded-md'>
+              <ul className='flex flex-col my-5 bg-blue-100 p-2 rounded-md'>
                 {profileBooks.map((book) => (
                   <li
                     key={book._id}
-                    className='flex flex-col p-3 border-b-2 border-neutral-700 last:border-b-0'
+                    className='flex flex-col p-3 border-b-2 border-blue-900 last:border-b-0'
                   >
                     <div className='flex space-x-2'>
                       <img
                         src={book.cover ? book.cover : cover}
                         alt={book.title}
-                        className='h-48 object-cover object-center border border-neutral-500 md:h-60'
+                        className='h-48 object-cover object-center border border-blue-900 md:h-60'
                       />
                       <div className='flex-1'>
                         <a href={`/books/${book.bookId}`}>
-                          <h2 className='text-red-600 md:text-2xl'>
+                          <h2 className='text-blue-900 md:text-2xl'>
                             {book.title}
                           </h2>
                         </a>
@@ -186,19 +186,19 @@ const Profile = () => {
                       </div>
                       {user.id === book.user._id && (
                         <span
-                          className='material-symbols-outlined text-red-600 cursor-pointer md:text-3xl self-start'
+                          className='material-symbols-outlined text-blue-900 cursor-pointer md:text-3xl self-start'
                           onClick={() => deleteBook(book.bookId)}
                         >
                           delete
                         </span>
                       )}
                     </div>
-                    <div className='flex space-x-2 text-sm text-black font-bold self-start items-start md:flex-row md:space-y-0 md:space-x-2 md:text-base mt-5'>
+                    <div className='flex space-x-2 text-sm text-white font-bold self-start items-start md:flex-row md:space-y-0 md:space-x-2 md:text-base mt-5'>
                       <button
                         className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
                           book.status === 'reading'
                             ? 'bg-green-600'
-                            : 'bg-red-600'
+                            : 'bg-blue-900'
                         }`}
                         value='reading'
                         disabled={
@@ -212,7 +212,7 @@ const Profile = () => {
                         className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
                           book.status === 'completed'
                             ? 'bg-green-600'
-                            : 'bg-red-600'
+                            : 'bg-blue-900'
                         }`}
                         value='completed'
                         disabled={
@@ -227,7 +227,7 @@ const Profile = () => {
                         className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
                           book.status === 'planning'
                             ? 'bg-green-600'
-                            : 'bg-red-600'
+                            : 'bg-blue-900'
                         }`}
                         value='planning'
                         disabled={
