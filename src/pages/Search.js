@@ -60,11 +60,11 @@ const Search = () => {
             type='text'
             onChange={(e) => setQuery(e.target.value)}
             value={query}
-            className='p-3 rounded-lg md:flex-1 border border-blue-950'
+            className='p-3 rounded-lg md:flex-1 border border-blue-900'
           />
           <button
             disabled={!query.length}
-            className='bg-blue-900 hover:bg-blue-800 rounded-md p-3 px-10 text-white font-bold'
+            className='bg-blue-900 hover:bg-blue-800 rounded-md p-3 px-10 text-white font-bold cursor-pointer'
           >
             Search
           </button>

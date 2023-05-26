@@ -17,7 +17,7 @@ const Signup = () => {
   return (
     <main className='mx-auto my-12 lg:my-auto'>
       <form
-        className='bg-blue-100 flex flex-col text-neutral-800 p-6 rounded-md w-72 sm:w-96 border border-blue-950'
+        className='bg-blue-100 flex flex-col text-neutral-800 p-6 rounded-md w-72 sm:w-96 border border-blue-900'
         onSubmit={handleSubmit}
       >
         <h1 className='text-4xl text-blue-900 font-bold mb-6'>Sign Up</h1>

@@ -40,7 +40,7 @@ const Users = () => {
           <span className='loader self-center mt-5'></span>
         ) : (
           <div>
-            <h1 className='text-5xl font-bold mb-5 text-red-600'>Users</h1>
+            <h1 className='text-5xl font-bold mb-5 text-blue-900'>Users</h1>
             <ul className='grid grid-cols-1 my-5 gap-5 md:grid-cols-3 md:space-y-0 '>
               {books &&
                 users.map((user) => (
