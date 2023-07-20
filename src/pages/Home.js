@@ -34,7 +34,7 @@ const Home = () => {
         ) : (
           <button
           disabled={isLoading}
-          className='text-white bg-blue-900 py-3 px-4 rounded-md hover:opacity-90'
+          className='text-white bg-blue-900 py-3 px-4 rounded-md hover:opacity-90 font-bold'
           onClick={handleGuestLogin}
         >
           Guest Login
