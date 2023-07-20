@@ -73,40 +73,40 @@ const Header = () => {
         className={
           !mobileMenu
             ? 'hidden md:hidden'
-            : 'fixed z-10 top-0 bg-black w-full text-2xl flex flex-col justify-center md:hidden'
+            : 'fixed z-10 top-0 bg-blue-900 w-full text-2xl flex flex-col justify-center md:hidden'
         }
         onClick={toggleMobileMenu}
       >
-        <button className='text-7xl self-end px-6 hover:text-blue-900'>
+        <button className='text-7xl self-end px-6 hover:opacity-90'>
           &times;
         </button>
         <nav className='flex flex-col min-h-screen py-4'>
-          <Link to='/' className='text-center py-4 hover:text-blue-900'>
+          <Link to='/' className='text-center py-4 hover:opacity-90'>
             Home
           </Link>
           {user ? (
             <>
               <Link
                 to={`/user/${user.userName}`}
-                className='text-center py-4 hover:text-blue-900'
+                className='text-center py-4 hover:opacity-90'
               >
                 Profile
               </Link>
               <Link
                 to='/search'
-                className='text-center py-4 hover:text-blue-900'
+                className='text-center py-4 hover:opacity-90'
               >
                 Search
               </Link>
               <Link
                 to='/users'
-                className='text-center py-4 hover:text-blue-900'
+                className='text-center py-4 hover:opacity-90'
               >
                 Users
               </Link>
               <button
                 onClick={handleClick}
-                className='text-center py-4 hover:text-blue-900'
+                className='text-center py-4 hover:opacity-90'
               >
                 Logout
               </button>
@@ -115,13 +115,13 @@ const Header = () => {
             <>
               <Link
                 to='/login'
-                className='text-center py-4 hover:text-blue-900'
+                className='text-center py-4 hover:opacity-90'
               >
                 Login
               </Link>
               <Link
                 to='/signup'
-                className='text-center py-4 hover:text-blue-900'
+                className='text-center py-4 hover:opacity-90'
               >
                 Sign Up
               </Link>
