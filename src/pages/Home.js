@@ -1,8 +1,16 @@
 import { Link } from 'react-router-dom';
+import { useLogin } from '../hooks/useLogin';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 const Home = () => {
   const { user } = useAuthContext();
+  const { login, isLoading } = useLogin();
+
+  const handleGuestLogin = async (e) => {
+    e.preventDefault();
+
+    await login("mike@gmail.com", "Mike123!");
+  };
 
   return (
     <main className='max-w-4xl m-auto'>
@@ -24,20 +32,13 @@ const Home = () => {
             </Link>
           </div>
         ) : (
-          <div className='flex space-x-5 font-bold'>
-            <Link
-              to='/login'
-              className='text-white bg-blue-900 py-3 px-4 rounded-md hover:opacity-90'
-            >
-              Login
-            </Link>
-            <Link
-              to='/signup'
-              className='text-white bg-blue-900 py-3 px-4 rounded-md hover:opacity-90'
-            >
-              Sign Up
-            </Link>
-          </div>
+          <button
+          disabled={isLoading}
+          className='text-white bg-blue-900 py-3 px-4 rounded-md hover:opacity-90'
+          onClick={handleGuestLogin}
+        >
+          Guest Login
+        </button>
         )}
       </section>
     </main>
