@@ -4,14 +4,14 @@ import Error from '../components/Error';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
-  const [userName, setUserName] = useState('');
+  const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await signup(email, userName, password);
+    await signup(email, username, password);
   };
 
   return (
@@ -32,7 +32,7 @@ const Signup = () => {
         <input
           type='text'
           onChange={(e) => setUserName(e.target.value)}
-          value={userName}
+          value={username}
           className='mb-6 rounded-md text-black p-2 border border-blue-950'
         />
         <label className='mb-1'>Password</label>

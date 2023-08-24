@@ -32,7 +32,7 @@ const BookDetails = () => {
       if (response.ok) {
         setLoading(false);
         setBook(json.details);
-        setStatus(json.status);
+        setStatus(json.status?.toLowerCase());
       }
     };
 
@@ -41,7 +41,7 @@ const BookDetails = () => {
 
   const addBook = async (e) => {
     const newBook = {
-      bookId: id,
+      googleBooksId: id,
       title: book.title,
       authors: book.authors ? book.authors : ['Unknown Author'],
       cover: !book.imageLinks ? '' : book.imageLinks.thumbnail,
@@ -53,7 +53,7 @@ const BookDetails = () => {
 
     if (response.ok) {
       setStatus(e.target.value);
-      dispatch({ type: 'ADD_BOOK', payload: json });
+      dispatch({ type: 'ADD_BOOK', payload: json.book });
     }
   };
 
@@ -67,7 +67,7 @@ const BookDetails = () => {
 
     if (response.ok) {
       setStatus(e.target.value);
-      dispatch({ type: 'UPDATE_BOOK', payload: json });
+      dispatch({ type: 'UPDATE_BOOK', payload: json.book });
     }
   };
 
@@ -84,8 +84,8 @@ const BookDetails = () => {
               src={
                 !book.imageLinks
                   ? cover
-                  : book.imageLinks.small
-                  ? book.imageLinks.small
+                  : book.imageLinks.smallThumbnail
+                  ? book.imageLinks.smallThumbnail
                   : book.imageLinks.thumbnail
               }
               className='border border-blue-900 h-full'

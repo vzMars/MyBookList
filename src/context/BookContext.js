@@ -19,13 +19,22 @@ export const bookReducer = (state, action) => {
     case 'UPDATE_BOOK':
       return {
         books: state.books.map((book) =>
-          book._id === action.payload._id ? action.payload : book
+          book.id === action.payload.id &&
+          book.user.id === action.payload.user.id
+            ? action.payload
+            : book
         ),
         isLoading: false,
       };
     case 'DELETE_BOOK':
       return {
-        books: state.books.filter((book) => book._id !== action.payload._id),
+        books: state.books.filter(
+          (book) =>
+            !(
+              book.id === action.payload.id &&
+              book.user.id === action.payload.user.id
+            )
+        ),
         isLoading: false,
       };
     default:

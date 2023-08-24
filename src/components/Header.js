@@ -34,7 +34,7 @@ const Header = () => {
             {user ? (
               <>
                 <Link
-                  to={`/user/${user.userName}`}
+                  to={`/user/${user.username}`}
                   className='hover:opacity-90'
                 >
                   Profile
@@ -87,21 +87,15 @@ const Header = () => {
           {user ? (
             <>
               <Link
-                to={`/user/${user.userName}`}
+                to={`/user/${user.username}`}
                 className='text-center py-4 hover:opacity-90'
               >
                 Profile
               </Link>
-              <Link
-                to='/search'
-                className='text-center py-4 hover:opacity-90'
-              >
+              <Link to='/search' className='text-center py-4 hover:opacity-90'>
                 Search
               </Link>
-              <Link
-                to='/users'
-                className='text-center py-4 hover:opacity-90'
-              >
+              <Link to='/users' className='text-center py-4 hover:opacity-90'>
                 Users
               </Link>
               <button
@@ -113,16 +107,10 @@ const Header = () => {
             </>
           ) : (
             <>
-              <Link
-                to='/login'
-                className='text-center py-4 hover:opacity-90'
-              >
+              <Link to='/login' className='text-center py-4 hover:opacity-90'>
                 Login
               </Link>
-              <Link
-                to='/signup'
-                className='text-center py-4 hover:opacity-90'
-              >
+              <Link to='/signup' className='text-center py-4 hover:opacity-90'>
                 Sign Up
               </Link>
             </>

@@ -30,7 +30,7 @@ function App() {
           </Route>
 
           <Route element={<RequireAuth />}>
-            <Route path='user/:userName' element={<Profile />} />
+            <Route path='user/:username' element={<Profile />} />
             <Route path='search' element={<Search />} />
             <Route path='users' element={<Users />} />
             <Route path='books/:id' element={<BookDetails />} />

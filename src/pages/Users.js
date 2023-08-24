@@ -40,9 +40,9 @@ const Users = () => {
               {books &&
                 users.map((user) => (
                   <UserCard
-                    key={user._id}
+                    key={user.id}
                     user={user}
-                    books={books.filter((book) => book.user._id === user._id)}
+                    books={books.filter((book) => book.user.id === user.id)}
                   />
                 ))}
             </ul>

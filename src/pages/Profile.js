@@ -2,15 +2,12 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useBookContext } from '../hooks/useBookContext';
 import { useAuthContext } from '../hooks/useAuthContext';
-import {
-  getUserProfile,
-  removeBook,
-  updateBookStatus,
-} from '../services/BookService';
+import { removeBook, updateBookStatus } from '../services/BookService';
+import { getUserProfile } from '../services/UserService';
 import cover from '../images/cover.png';
 
 const Profile = () => {
-  const { userName } = useParams();
+  const { username } = useParams();
   const navigate = useNavigate();
   const [profileName, setProfileName] = useState(null);
   const [profileBooks, setProfileBooks] = useState(null);
@@ -22,7 +19,7 @@ const Profile = () => {
   useEffect(() => {
     const getProfile = async () => {
       setLoading(true);
-      const response = await getUserProfile(userName);
+      const response = await getUserProfile(username);
 
       const json = await response.json();
 
@@ -32,27 +29,28 @@ const Profile = () => {
       }
 
       if (response.ok) {
-        setProfileName(json.userName);
+        setProfileName(json.username);
         setProfileBooks(json.books);
         setLoading(false);
       }
     };
 
     getProfile();
-  }, [userName, navigate]);
+  }, [username, navigate]);
 
   const switchTabs = (e) => {
     if (activeTab === e.target.value) return;
 
     if (e.target.value === 'all') {
       setProfileBooks(
-        books.filter((book) => book.user.userName === profileName)
+        books.filter((book) => book.user.username === profileName)
       );
     } else {
       setProfileBooks(
         books.filter(
           (book) =>
-            book.user.userName === profileName && book.status === e.target.value
+            book.user.username === profileName &&
+            book.status.toLowerCase() === e.target.value
         )
       );
     }
@@ -65,8 +63,8 @@ const Profile = () => {
     const json = await response.json();
 
     if (response.ok) {
-      dispatch({ type: 'DELETE_BOOK', payload: json });
-      setProfileBooks(profileBooks.filter((book) => book.bookId !== id));
+      dispatch({ type: 'DELETE_BOOK', payload: json.book });
+      setProfileBooks(profileBooks.filter((book) => book.googleBooksId !== id));
     }
   };
 
@@ -80,15 +78,19 @@ const Profile = () => {
     const json = await response.json();
 
     if (response.ok) {
-      dispatch({ type: 'UPDATE_BOOK', payload: json });
+      dispatch({ type: 'UPDATE_BOOK', payload: json.book });
       if (activeTab === 'all') {
         setProfileBooks(
           profileBooks.map((book) =>
-            book.bookId === id ? { ...book, status: e.target.value } : book
+            book.googleBooksId === id
+              ? { ...book, status: e.target.value }
+              : book
           )
         );
       } else {
-        setProfileBooks(profileBooks.filter((book) => book.bookId !== id));
+        setProfileBooks(
+          profileBooks.filter((book) => book.googleBooksId !== id)
+        );
       }
     }
   };
@@ -102,7 +104,7 @@ const Profile = () => {
           <div className='text-black'>
             <h1 className='text-blue-900 text-5xl font-bold mb-5 text-center'>
               {`Viewing ${
-                profileName === user.userName ? 'Your' : `${profileName}'s`
+                profileName === user.username ? 'Your' : `${profileName}'s`
               } Book List`}
             </h1>
             <nav className='flex justify-between md:justify-evenly'>
@@ -147,7 +149,7 @@ const Profile = () => {
               <ul className='flex flex-col my-5 bg-blue-100 p-2 rounded-md'>
                 {profileBooks.map((book) => (
                   <li
-                    key={book._id}
+                    key={book.id}
                     className='flex flex-col p-3 border-b-2 border-blue-900 last:border-b-0'
                   >
                     <div className='flex space-x-2'>
@@ -157,17 +159,17 @@ const Profile = () => {
                         className='h-48 object-cover object-center border border-blue-900 md:h-60'
                       />
                       <div className='flex-1'>
-                        <a href={`/books/${book.bookId}`}>
+                        <a href={`/books/${book.googleBooksId}`}>
                           <h2 className='text-blue-900 md:text-2xl'>
                             {book.title}
                           </h2>
                         </a>
                         <span>By {book.authors.join(', ')}</span>
                       </div>
-                      {user.id === book.user._id && (
+                      {user.id === book.user.id && (
                         <span
                           className='material-symbols-outlined text-blue-900 cursor-pointer md:text-3xl self-start'
-                          onClick={() => deleteBook(book.bookId)}
+                          onClick={() => deleteBook(book.googleBooksId)}
                         >
                           delete
                         </span>
@@ -176,45 +178,46 @@ const Profile = () => {
                     <div className='flex space-x-2 text-sm text-white font-bold self-start items-start md:flex-row md:space-y-0 md:space-x-2 md:text-base mt-5'>
                       <button
                         className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
-                          book.status === 'reading'
+                          book.status.toLowerCase() === 'reading'
                             ? 'bg-green-600'
                             : 'bg-blue-900'
                         }`}
                         value='reading'
                         disabled={
-                          book.status === 'reading' || book.user._id !== user.id
+                          book.status.toLowerCase() === 'reading' ||
+                          book.user.id !== user.id
                         }
-                        onClick={(e) => updateStatus(e, book.bookId)}
+                        onClick={(e) => updateStatus(e, book.googleBooksId)}
                       >
                         Reading
                       </button>
                       <button
                         className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
-                          book.status === 'completed'
+                          book.status.toLowerCase() === 'completed'
                             ? 'bg-green-600'
                             : 'bg-blue-900'
                         }`}
                         value='completed'
                         disabled={
-                          book.status === 'completed' ||
-                          book.user._id !== user.id
+                          book.status.toLowerCase() === 'completed' ||
+                          book.user.id !== user.id
                         }
-                        onClick={(e) => updateStatus(e, book.bookId)}
+                        onClick={(e) => updateStatus(e, book.googleBooksId)}
                       >
                         Completed
                       </button>
                       <button
                         className={`p-1.5 py-2 hover:opacity-90 rounded-md ${
-                          book.status === 'planning'
+                          book.status.toLowerCase() === 'planning'
                             ? 'bg-green-600'
                             : 'bg-blue-900'
                         }`}
                         value='planning'
                         disabled={
-                          book.status === 'planning' ||
-                          book.user._id !== user.id
+                          book.status.toLowerCase() === 'planning' ||
+                          book.user.id !== user.id
                         }
-                        onClick={(e) => updateStatus(e, book.bookId)}
+                        onClick={(e) => updateStatus(e, book.googleBooksId)}
                       >
                         Planning
                       </button>

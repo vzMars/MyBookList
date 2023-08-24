@@ -10,16 +10,16 @@ export const useSignup = () => {
   const { dispatch } = useAuthContext();
   const { dispatch: bookDispatch } = useBookContext();
 
-  const signup = async (email, userName, password) => {
+  const signup = async (email, username, password) => {
     setIsLoading(true);
     setError(null);
 
-    const response = await userSignup(email, userName, password);
+    const response = await userSignup(email, username, password);
     const json = await response.json();
 
     if (!response.ok) {
       setIsLoading(false);
-      setError(json.error);
+      setError(json.message);
     }
 
     if (response.ok) {
