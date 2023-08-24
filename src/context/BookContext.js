@@ -1,5 +1,6 @@
 import { createContext, useReducer, useEffect } from 'react';
-import { getBooks } from '../services/getBooks';
+import { getBooks } from '../services/BookService';
+import Loader from '../components/Loader';
 
 export const BookContext = createContext();
 
@@ -39,13 +40,13 @@ export const BookProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    getBooks(dispatch);
+    getBooks().then((books) => dispatch({ type: 'SET_BOOKS', payload: books }));
   }, []);
 
   return (
     <>
       {state.isLoading ? (
-        <span className='loader'></span>
+        <Loader />
       ) : (
         <BookContext.Provider value={{ ...state, dispatch }}>
           {children}

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 import { useBookContext } from './useBookContext';
-import { getBooks } from '../services/getBooks';
+import { getBooks } from '../services/BookService';
+import { userSignup } from '../services/AuthService';
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
@@ -13,18 +14,7 @@ export const useSignup = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(
-      'https://api.mybooklist.vzmars.com/api/auth/signup',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({ email, userName, password }),
-      }
-    );
-
+    const response = await userSignup(email, userName, password);
     const json = await response.json();
 
     if (!response.ok) {
@@ -33,8 +23,9 @@ export const useSignup = () => {
     }
 
     if (response.ok) {
+      const books = await getBooks();
       dispatch({ type: 'LOGIN', payload: json.user });
-      getBooks(bookDispatch);
+      bookDispatch({ type: 'SET_BOOKS', payload: books });
       setIsLoading(false);
     }
   };

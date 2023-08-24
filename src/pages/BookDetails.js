@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useBookContext } from '../hooks/useBookContext';
+import {
+  getBookDetails,
+  addNewBook,
+  updateBookStatus,
+} from '../services/BookService';
 import cover from '../images/cover.png';
 
 const BookDetails = () => {
@@ -15,14 +20,8 @@ const BookDetails = () => {
   useEffect(() => {
     const getDetails = async () => {
       setLoading(true);
-      const response = await fetch(
-        `https://api.mybooklist.vzmars.com/api/books/${id}`,
-        {
-          method: 'GET',
-          credentials: 'include',
-        }
-      );
 
+      const response = await getBookDetails(id);
       const json = await response.json();
 
       if (!response.ok) {
@@ -49,18 +48,7 @@ const BookDetails = () => {
       status: e.target.value,
     };
 
-    const response = await fetch(
-      'https://api.mybooklist.vzmars.com/api/books',
-      {
-        method: 'POST',
-        body: JSON.stringify(newBook),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      }
-    );
-
+    const response = await addNewBook(newBook);
     const json = await response.json();
 
     if (response.ok) {
@@ -74,18 +62,7 @@ const BookDetails = () => {
       status: e.target.value,
     };
 
-    const response = await fetch(
-      `https://api.mybooklist.vzmars.com/api/books/${id}`,
-      {
-        method: 'PUT',
-        body: JSON.stringify(updatedStatus),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      }
-    );
-
+    const response = await updateBookStatus(id, updatedStatus);
     const json = await response.json();
 
     if (response.ok) {

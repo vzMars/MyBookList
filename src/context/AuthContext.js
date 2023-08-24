@@ -1,4 +1,6 @@
 import { createContext, useReducer, useEffect } from 'react';
+import { isAuthenticated } from '../services/AuthService';
+import Loader from '../components/Loader';
 
 export const AuthContext = createContext();
 
@@ -26,27 +28,21 @@ export const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const getAuthStatus = async () => {
-      const response = await fetch(
-        'https://api.mybooklist.vzmars.com/api/auth',
-        {
-          method: 'GET',
-          credentials: 'include',
-        }
-      );
-
-      const json = await response.json();
-
-      dispatch({ type: 'LOGIN', payload: json.user });
-    };
-
-    getAuthStatus();
+    isAuthenticated()
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.user === null) throw new Error();
+        dispatch({ type: 'LOGIN', payload: json.user });
+      })
+      .catch(() => {
+        dispatch({ type: 'LOGOUT' });
+      });
   }, []);
 
   return (
     <>
       {state.isLoading ? (
-        <span className='loader'></span>
+        <Loader />
       ) : (
         <AuthContext.Provider value={{ ...state, dispatch }}>
           {children}

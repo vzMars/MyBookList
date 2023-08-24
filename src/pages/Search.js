@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Books from '../components/Books';
 import Pagination from '../components/Pagination';
 import Error from '../components/Error';
+import { bookSearch } from '../services/BookService';
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -18,14 +19,7 @@ const Search = () => {
     setLoading(true);
     setError(null);
 
-    const response = await fetch(
-      `https://api.mybooklist.vzmars.com/api/books/search/${query}`,
-      {
-        method: 'GET',
-        credentials: 'include',
-      }
-    );
-
+    const response = await bookSearch(query);
     const json = await response.json();
 
     if (!response.ok) {

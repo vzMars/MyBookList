@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useBookContext } from '../hooks/useBookContext';
 import { useAuthContext } from '../hooks/useAuthContext';
+import {
+  getUserProfile,
+  removeBook,
+  updateBookStatus,
+} from '../services/BookService';
 import cover from '../images/cover.png';
 
 const Profile = () => {
@@ -17,13 +22,7 @@ const Profile = () => {
   useEffect(() => {
     const getProfile = async () => {
       setLoading(true);
-      const response = await fetch(
-        `https://api.mybooklist.vzmars.com/api/books/user/${userName}`,
-        {
-          method: 'GET',
-          credentials: 'include',
-        }
-      );
+      const response = await getUserProfile(userName);
 
       const json = await response.json();
 
@@ -61,16 +60,7 @@ const Profile = () => {
   };
 
   const deleteBook = async (id) => {
-    const response = await fetch(
-      `https://api.mybooklist.vzmars.com/api/books/${id}`,
-      {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      }
-    );
+    const response = await removeBook(id);
 
     const json = await response.json();
 
@@ -85,17 +75,7 @@ const Profile = () => {
       status: e.target.value,
     };
 
-    const response = await fetch(
-      `https://api.mybooklist.vzmars.com/api/books/${id}`,
-      {
-        method: 'PUT',
-        body: JSON.stringify(updatedStatus),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      }
-    );
+    const response = await updateBookStatus(id, updatedStatus);
 
     const json = await response.json();
 

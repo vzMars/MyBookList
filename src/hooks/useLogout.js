@@ -1,3 +1,4 @@
+import { userLogout } from '../services/AuthService';
 import { useAuthContext } from './useAuthContext';
 import { useBookContext } from './useBookContext';
 
@@ -6,13 +7,7 @@ export const useLogout = () => {
   const { dispatch: bookDispatch } = useBookContext();
 
   const logout = async () => {
-    const response = await fetch(
-      'https://api.mybooklist.vzmars.com/api/auth/logout',
-      {
-        method: 'GET',
-        credentials: 'include',
-      }
-    );
+    const response = await userLogout();
 
     if (response.ok) {
       dispatch({ type: 'LOGOUT' });

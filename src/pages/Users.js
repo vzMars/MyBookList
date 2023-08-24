@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useBookContext } from '../hooks/useBookContext';
 import UserCard from '../components/UserCard';
+import { getAllUsers } from '../services/UserService';
 
 const Users = () => {
   const [users, setUsers] = useState(null);
@@ -10,14 +11,8 @@ const Users = () => {
   useEffect(() => {
     const getUsers = async () => {
       setLoading(true);
-      const response = await fetch(
-        'https://api.mybooklist.vzmars.com/api/auth/users',
-        {
-          method: 'GET',
-          credentials: 'include',
-        }
-      );
 
+      const response = await getAllUsers();
       const json = await response.json();
 
       if (!response.ok) {
