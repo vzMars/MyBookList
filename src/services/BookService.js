@@ -1,9 +1,9 @@
-const API_URL = 'https://api.mybooklist.vzmars.com/api';
-// const API_URL = 'http://localhost:8080/api';
+// const API_URL = 'https://api.mybooklist.vzmars.com/api';
+const API_URL = 'https://localhost:7089/api';
 
 export const getBooks = async () => {
   try {
-    const response = await fetch(`${API_URL}/books`, {
+    const response = await fetch(`${API_URL}/book`, {
       method: 'GET',
       credentials: 'include',
     });
@@ -17,21 +17,14 @@ export const getBooks = async () => {
 };
 
 export const bookSearch = (query) => {
-  return fetch(`${API_URL}/books/search/${query}`, {
-    method: 'GET',
-    credentials: 'include',
-  });
-};
-
-export const getUserProfile = (userName) => {
-  return fetch(`${API_URL}/books/user/${userName}`, {
+  return fetch(`${API_URL}/book/search/${query}`, {
     method: 'GET',
     credentials: 'include',
   });
 };
 
 export const removeBook = (id) => {
-  return fetch(`${API_URL}/books/${id}`, {
+  return fetch(`${API_URL}/book/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -41,7 +34,7 @@ export const removeBook = (id) => {
 };
 
 export const updateBookStatus = (id, updatedStatus) => {
-  return fetch(`${API_URL}/books/${id}`, {
+  return fetch(`${API_URL}/book/${id}`, {
     method: 'PUT',
     body: JSON.stringify(updatedStatus),
     headers: {
@@ -52,14 +45,14 @@ export const updateBookStatus = (id, updatedStatus) => {
 };
 
 export const getBookDetails = (id) => {
-  return fetch(`${API_URL}/books/${id}`, {
+  return fetch(`${API_URL}/book/${id}`, {
     method: 'GET',
     credentials: 'include',
   });
 };
 
 export const addNewBook = (book) => {
-  return fetch(`${API_URL}/books`, {
+  return fetch(`${API_URL}/book`, {
     method: 'POST',
     body: JSON.stringify(book),
     headers: {
